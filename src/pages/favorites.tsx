@@ -8,6 +8,7 @@ import { createMealById } from "../calls/createmeal";
 function Favorites() {
     const { favs } = useFavorites();
     const [favorites, setFavorites] = useState<cardProps[]>([]);
+    const [loadedCards, setLoadedCards] = useState(true);
     useEffect(() => {
         const fetchFavoriteMeals = async () => {
             try {
@@ -23,6 +24,7 @@ function Favorites() {
                     videoUrl: meal.strYoutube
                 }));
                     setFavorites(loadedCards);
+                    setLoadedCards(false);
                 }
                 catch (error) {
                     console.error("Error fetching favorite meals:", error);
@@ -34,6 +36,13 @@ function Favorites() {
                 setFavorites([]);
             }
     }, [favs]);
+    if (loadedCards) {
+        return (
+            <div className="justify-center items-center flex flex-wrap gap-4 p-4">
+            <p className="animate-jump animate-iteration-count-infinite pt-2">Loading your favorite recipes...</p>
+            </div>
+        )
+    } 
     if(favorites.length===0){
         return(
             <div className="flex justify-center items-center h-full text-2xl font-semibold">
