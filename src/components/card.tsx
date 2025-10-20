@@ -7,7 +7,7 @@ function Card ({ id, title, imageUrl,country,videoUrl }: cardProps) {
     const isfav = favs.includes(id);
     return<>
     <div className="animate-fade-in-down border-2 border-gray-300 rounded-lg  shadow-md w-64 flex flex-col items-center gap-2 font-serif ">
-        <img src={imageUrl} alt= "" className="rounded-t-sm w-full"/>
+        <img src={imageUrl} alt= "" loading="lazy" className="rounded-t-sm w-full"/>
         <div >
             <h2>{title}</h2>
         </div>

@@ -5,36 +5,52 @@ import { createRMeal } from "../calls/createmeal";
 
 function Home() {
     const [cards ,setcards] = useState<cardProps[]>([]);
+    const [loadedCards, setLoadedCards] = useState<boolean>(false);
     useEffect(() => {
-        const fetchMeals = async () => {
-        for (let i = 0; i < 6; i++) {
-            createRMeal().then((meal) => {
-                const newCard: cardProps = {
+        const fetchRandomMeals = async () => {
+            const mealPromises = [];
+            for (let i = 0; i < 12; i++) {
+                mealPromises.push(createRMeal());
+            }
+            try {
+                const meals = await Promise.all(mealPromises);
+                const newcards: cardProps[] = meals.map((meal) => {
+                return {
                     id: meal.idMeal,
                     title: meal.strMeal,
                     imageUrl: meal.strMealThumb,
                     country: meal.strArea,
                     videoUrl: meal.strYoutube
                 };
-                setcards((prevCards) => [...prevCards, newCard]);
+                });
+                setcards(newcards);
+                setLoadedCards(true);
+            } catch (error) {
+                console.error("Error fetching random meals:", error);
             }
-        );
+        };
+        {
+            if(cards.length===0)
+                {fetchRandomMeals();}
+            
         }
-    };
-        fetchMeals();
     },[]);
     return (
         <div className="justify-center items-center flex flex-wrap gap-4 p-4">
-            {cards.map((card) => (
-                <Card
-                    key={card.id}
-                    id={card.id}
-                    title={card.title}
-                    imageUrl={card.imageUrl}
-                    country={card.country}
-                    videoUrl={card.videoUrl}
-                />
-            ))}
+            {loadedCards ? (
+                cards.map((card) => (
+                    <Card 
+                        key={card.id}
+                        id={card.id}
+                        title={card.title}
+                        imageUrl={card.imageUrl}
+                        country={card.country}
+                        videoUrl={card.videoUrl}
+                    />
+                ))
+            ) : (
+                <p className="animate-jump animate-iteration-count-infinite pt-2">Loading our best recipes...</p>
+            )}
         </div>
     )
 }

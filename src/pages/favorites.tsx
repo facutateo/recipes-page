@@ -9,7 +9,6 @@ function Favorites() {
     const { favs } = useFavorites();
     const [favorites, setFavorites] = useState<cardProps[]>([]);
     useEffect(() => {
-        console.log("IDs de favoritos (favs):", favs);
         const fetchFavoriteMeals = async () => {
             try {
                 const mealPromises = favs.map(id => createMealById(id));
@@ -35,7 +34,13 @@ function Favorites() {
                 setFavorites([]);
             }
     }, [favs]);
-
+    if(favorites.length===0){
+        return(
+            <div className="flex justify-center items-center h-full text-2xl font-semibold">
+                No favorite meals added yet.
+            </div>
+        )
+    }
     return (
         <div className="justify-center items-center flex flex-wrap gap-4 p-4">
         {favorites.map((card) => (
