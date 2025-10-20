@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Card from "../components/card";
 import { createMealsByTitle } from "../calls/createmeal";
 import type { cardProps } from "../interfaces/interfaces";
-import { createMealsByLetters } from "../calls/createmeal";
 import { useSearchParams } from "react-router-dom";
 import type { mealDetailProps } from "../interfaces/interfaces";
 
