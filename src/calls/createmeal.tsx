@@ -25,6 +25,6 @@ export function createMealsByLetters(letters: string) {
     return fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${letters}`)
         .then((response) => response.json())
         .then((data) => {
-            return data.meals[0];
+            return data;
         });
 }

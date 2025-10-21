@@ -36,7 +36,7 @@ function Favorites() {
                 setFavorites([]);
             }
     }, [favs]);
-    if (loadedCards) {
+    if (loadedCards && favs.length > 0) {
         return (
             <div className="justify-center items-center flex flex-wrap gap-4 p-4">
             <p className="animate-jump animate-iteration-count-infinite pt-2">Loading your favorite recipes...</p>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Card from "../components/card";
 import { createMealsByTitle } from "../calls/createmeal";
+import { createMealsByLetters } from "../calls/createmeal";
 import type { cardProps } from "../interfaces/interfaces";
 import { useSearchParams } from "react-router-dom";
 import type { mealDetailProps } from "../interfaces/interfaces";
@@ -17,6 +18,9 @@ function Search() {
             const mealPromises = [];
             setLoading(true);
             if(query){
+                if(query.length===1){
+                    mealPromises.push( createMealsByLetters(query));
+                }else
                 mealPromises.push(createMealsByTitle(query));
             }else {
                 setMeals([]);
