@@ -28,8 +28,8 @@ function NavBar() {
         <nav className="justify-start flex gap-10 p-4 shadow-md">
             <Logoicon className="h-8 w-8"/>
             <div className="flex gap-6">
-                <a href="/home" className="text-gray-600 hover:text-gray-800 mt-2 hover:animate-jiggle">Home</a>
-                <a href="/favorites" className="text-gray-600 hover:text-gray-800 mt-2 hover:animate-jiggle">Favorites</a>
+                <a href="/home" className="text-gray-600 hover:text-gray-800 mt-2 hover:animate-jiggle hover:animate-iteration-count-infinite">Home</a>
+                <a href="/favorites" className="text-gray-600 hover:text-gray-800 mt-2 hover:animate-jiggle hover:animate-iteration-count-infinite">Favorites</a>
                 <ThemeButton />
                 
             </div>

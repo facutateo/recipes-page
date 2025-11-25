@@ -3,23 +3,26 @@ import Moonicon from '../assets/moon-fill.svg?react';
 import { useEffect, useState } from 'react';
 
 function ThemeButton() {
-    const [isDarkMode, setIsDarkMode] = useState(localStorage.getItem('theme') === 'dark');
+    const [isDarkMode, setIsDarkMode] = useState<'light' | 'dark'>(localStorage.getItem('theme') === 'dark' ? 'dark' : 'light');
         useEffect(() => {
-            if (isDarkMode) {
-                document.documentElement.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-            }
+        if (isDarkMode === 'dark') {
+            document.documentElement.classList.remove('dark', 'light');
+            localStorage.setItem('theme', 'dark');
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark', 'light');
+            document.documentElement.classList.add('light');
+            localStorage.setItem('theme', 'light');
+
+        }
         }, [isDarkMode]);
 
     const toggleTheme = () => {
-        setIsDarkMode(!isDarkMode);
+        setIsDarkMode(prevMode => (prevMode === 'dark' ? 'light' : 'dark'));
     }
     return (
         <button onClick={toggleTheme} className="focus:outline-none">
-            {isDarkMode ? <Sunicon className='h-5 w-5' /> : <Moonicon className='w-5 h-5' />}
+            {isDarkMode === 'dark' ? <Sunicon className='h-5 w-5' /> : <Moonicon className='w-5 h-5' />}
         </button>
     );
 }
