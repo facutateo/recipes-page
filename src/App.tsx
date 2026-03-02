@@ -8,10 +8,9 @@ function App() {
   return (
     <>
     <div >
-    <BrowserRouter>
+    <BrowserRouter basename='/recipes-page'>
     <NavBar />
       <Routes>
-            
         <Route path="/home" element={<Home />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/search" element={<Search />} />
