@@ -14,7 +14,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/search" element={<Search />} />
-        <Route path="*" element={<Navigate to="/home" replace />} />
+        <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
     </HashRouter>
     </div>
