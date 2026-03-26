@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import type { cardProps } from "../interfaces/interfaces";
 import Card from "../components/card";
 import { createRMeal } from "../calls/createmeal";
+import Cardloading from "../components/cardloading";
 
 function Home() {
     const [cards ,setcards] = useState<cardProps[]>([]);
@@ -34,7 +35,7 @@ function Home() {
                 {fetchRandomMeals();}
             
         }
-    },[]);
+    },[cards.length]);
     return (
         <div className="justify-center items-center flex flex-wrap gap-4 p-4">
             {loadedCards ? (
@@ -49,7 +50,9 @@ function Home() {
                     />
                 ))
             ) : (
-                <p className="animate-jump animate-iteration-count-infinite pt-2">Loading our best recipes...</p>
+                Array.from({length: 12}).map((_, i)=>(
+                    <Cardloading key={i} />
+                ))
             )}
         </div>
     )
