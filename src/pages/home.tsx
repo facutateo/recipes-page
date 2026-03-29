@@ -3,6 +3,7 @@ import type { cardProps } from "../interfaces/interfaces";
 import Card from "../components/card";
 import { createRMeal } from "../calls/createmeal";
 import Cardloading from "../components/cardloading";
+import Carrusel from "../components/carrusel";
 
 function Home() {
     const [cards ,setcards] = useState<cardProps[]>([]);
@@ -10,7 +11,7 @@ function Home() {
     useEffect(() => {
         const fetchRandomMeals = async () => {
             const mealPromises = [];
-            for (let i = 0; i < 12; i++) {
+            for (let i = 0; i < 10; i++) {
                 mealPromises.push(createRMeal());
             }
             try {
@@ -37,7 +38,11 @@ function Home() {
         }
     },[cards.length]);
     return (
-        <div className="justify-center items-center flex flex-wrap gap-4 p-4">
+        <>
+        <div>
+            <Carrusel />
+        </div>
+        <div className="justify-self-center items-center grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-4">
             {loadedCards ? (
                 cards.map((card) => (
                     <Card 
@@ -50,11 +55,13 @@ function Home() {
                     />
                 ))
             ) : (
-                Array.from({length: 12}).map((_, i)=>(
+                Array.from({length: 10}).map((_, i)=>(
                     <Cardloading key={i} />
                 ))
             )}
         </div>
+        
+        </>
     )
 }
 export default Home;

@@ -6,7 +6,7 @@ function Card ({ id, title, imageUrl,country,videoUrl }: cardProps) {
     const { favs, onToggleClick } = useFavorites();
     const isfav = favs.includes(id);
     return<>
-    <div className="rounded-lg w-64 h-100 flex flex-col items-center gap-2 font-sans animate-fade-in card">
+    <div className="rounded-lg w-64 h-100 flex flex-col items-center gap-2 font-sans animate-fade-in card hover:animate-slide-out-top">
         <img src={imageUrl} alt= {title} loading="lazy" className="rounded-t-sm w-full h-50"/>
         <div className="p-2.5" >
             <h2 className="text-center">{title}</h2>

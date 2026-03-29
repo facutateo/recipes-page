@@ -71,4 +71,38 @@ header.dark, footer.dark {
     background-color: color-mix(in srgb, var(--bg-b-color), transparent 90%);
 }
 
+@keyframes scrollInfinito {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(50%); } 
+}
 
+.carrousel {
+  display: flex; 
+  flex-wrap: nowrap;  
+  flex-direction: row;     
+  width: max-content;
+  animation: scrollInfinito 30s linear infinite;
+  gap: 40px;
+  will-change: transform;
+}
+
+.carrousel:hover {
+  animation-play-state: paused;
+}
+
+.carrousel-container {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 10%,
+    black 90%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 10%,
+    black 90%,
+    transparent
+  );
+}
