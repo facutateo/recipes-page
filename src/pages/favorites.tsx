@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Card from "../components/card";
 import { useFavorites } from "../contexts/favcontext";
 import { createMealById } from "../calls/createmeal";
+import Cardloading from "../components/cardloading";
 
 
 function Favorites() {
@@ -38,8 +39,10 @@ function Favorites() {
     }, [favs]);
     if (loadedCards && favs.length > 0) {
         return (
-            <div className="justify-center items-center flex flex-wrap gap-4 p-4">
-            <p className="animate-jump animate-iteration-count-infinite pt-2">Loading your favorite recipes...</p>
+            <div className="justify-self-center items-center grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-4">
+                {favs.map((id) => (
+                    <Cardloading key={id} />
+                ))}
             </div>
         )
     } 
@@ -51,7 +54,7 @@ function Favorites() {
         )
     }
     return (
-        <div className="justify-center items-center flex flex-wrap gap-4 p-4">
+        <div className="justify-self-center items-center grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-4">
         {favorites.map((card) => (
             <Card
                 key={card.id}
